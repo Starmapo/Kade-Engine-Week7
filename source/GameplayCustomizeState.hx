@@ -350,8 +350,9 @@ class GameplayCustomizeState extends MusicBeatState
 		if (FlxG.save.data.zoom > 1.2)
 			FlxG.save.data.zoom = 1.2;
 
-		FlxG.camera.zoom = FlxMath.lerp(Stage.camZoom, FlxG.camera.zoom, 0.95);
-		camHUD.zoom = FlxMath.lerp(FlxG.save.data.zoom, camHUD.zoom, 0.95);
+		var lerp = FlxMath.bound(1 - (elapsed * 3), 0, 1);
+		FlxG.camera.zoom = FlxMath.lerp(Stage.camZoom, FlxG.camera.zoom, lerp);
+		camHUD.zoom = FlxMath.lerp(FlxG.save.data.zoom, camHUD.zoom, lerp);
 
 		if (FlxG.mouse.overlaps(sick) && FlxG.mouse.pressed)
 		{

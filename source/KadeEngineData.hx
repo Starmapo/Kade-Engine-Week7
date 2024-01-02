@@ -1,6 +1,6 @@
-import flixel.input.gamepad.FlxGamepad;
-import openfl.Lib;
 import flixel.FlxG;
+import flixel.input.gamepad.FlxGamepad;
+import lime.app.Application;
 
 class KadeEngineData
 {
@@ -47,10 +47,10 @@ class KadeEngineData
 			FlxG.save.data.fpsRain = false;
 
 		if (FlxG.save.data.fpsCap == null)
-			FlxG.save.data.fpsCap = 120;
+			FlxG.save.data.fpsCap = Application.current.window.displayMode.refreshRate;
 
 		if (FlxG.save.data.fpsCap > 340 || FlxG.save.data.fpsCap < 60)
-			FlxG.save.data.fpsCap = 120; // baby proof so you can't hard lock ur copy of kade engine
+			FlxG.save.data.fpsCap = 60; // baby proof so you can't hard lock ur copy of kade engine
 
 		if (FlxG.save.data.scrollSpeed == null)
 			FlxG.save.data.scrollSpeed = 1;
@@ -171,6 +171,6 @@ class KadeEngineData
 
 		Main.watermarks = FlxG.save.data.watermark;
 
-		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		CoolUtil.setFramerate(FlxG.save.data.fpsCap);
 	}
 }

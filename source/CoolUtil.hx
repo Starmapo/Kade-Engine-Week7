@@ -1,5 +1,7 @@
 package;
 
+import flixel.FlxG;
+import flixel.math.FlxMath;
 import openfl.utils.Assets as OpenFlAssets;
 
 using StringTools;
@@ -47,5 +49,19 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
+	}
+
+	public static function setFramerate(framerate:Int)
+	{
+		if (framerate > FlxG.drawFramerate)
+		{
+			FlxG.updateFramerate = framerate;
+			FlxG.drawFramerate = framerate;
+		}
+		else
+		{
+			FlxG.drawFramerate = framerate;
+			FlxG.updateFramerate = framerate;
+		}
 	}
 }

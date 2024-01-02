@@ -2,8 +2,6 @@ package;
 
 import Section.SwagSection;
 import haxe.Json;
-import haxe.format.JsonParser;
-import openfl.utils.Assets as OpenFlAssets;
 
 using StringTools;
 

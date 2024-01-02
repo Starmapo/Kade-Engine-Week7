@@ -1,14 +1,7 @@
 package;
 
-import flixel.math.FlxMath;
-import flixel.FlxCamera;
-import flixel.text.FlxText;
 import lime.app.Application;
 import flixel.FlxBasic;
-#if FEATURE_DISCORD
-import Discord.DiscordClient;
-#end
-import flixel.util.FlxColor;
 import openfl.Lib;
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
@@ -159,7 +152,7 @@ class MusicBeatState extends FlxUIState
 					else if (nextStep < curStep)
 					{
 						// Song reset?
-						trace("(no bpm change) reset steps for some reason?? at " + Conductor.songPosition);
+						// trace("(no bpm change) reset steps for some reason?? at " + Conductor.songPosition);
 						curStep = nextStep;
 						updateBeat();
 						stepHit();
@@ -168,8 +161,6 @@ class MusicBeatState extends FlxUIState
 				Conductor.crochet = ((60 / Conductor.bpm) * 1000);
 			}
 		}
-
-		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
 
 		super.update(elapsed);
 	}
@@ -239,6 +230,5 @@ class MusicBeatState extends FlxUIState
 	function onWindowFocusIn():Void
 	{
 		Debug.logTrace("IM BACK!!!");
-		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
 	}
 }

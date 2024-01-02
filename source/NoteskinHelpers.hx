@@ -57,7 +57,7 @@ class NoteskinHelpers
 		#if FEATURE_FILESYSTEM
 		// TODO: Make this use OpenFlAssets.
 
-		Debug.logTrace("bruh momento");
+		// Debug.logTrace("bruh momento");
 
 		var path = FileSystem.absolutePath("assets/shared/images/noteskins") + "/" + getNoteskinByID(id);
 		var data:BitmapData = BitmapData.fromFile(path + ".png");
@@ -75,7 +75,7 @@ class NoteskinHelpers
 		#if FEATURE_FILESYSTEM
 		// TODO: Make this use OpenFlAssets.
 
-		Debug.logTrace("bruh momento");
+		// Debug.logTrace("bruh momento");
 
 		var path = FileSystem.absolutePath("assets/shared/images/noteskins") + "/" + getNoteskinByID(id) + "-pixel" + (ends ? "-ends" : "");
 		if (!FileSystem.exists(path + ".png"))
