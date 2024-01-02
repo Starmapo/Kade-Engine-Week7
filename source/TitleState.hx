@@ -1,31 +1,20 @@
 package;
 
-#if FEATURE_STEPMANIA
-import smTools.SMFile;
-#end
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
 import flixel.graphics.FlxGraphic;
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
-import flixel.input.gamepad.FlxGamepad;
+import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.system.FlxSound;
-import flixel.system.ui.FlxSoundTray;
-import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import lime.app.Application;
 import openfl.Assets;
-import flixel.input.keyboard.FlxKey;
 
 using StringTools;
 

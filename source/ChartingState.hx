@@ -1,55 +1,42 @@
 package;
 
-import Song.SongMeta;
-import openfl.system.System;
-import lime.app.Application;
-#if FEATURE_FILESYSTEM
-import sys.io.File;
-import sys.FileSystem;
-#end
-import flixel.addons.ui.FlxUIButton;
-import flixel.addons.ui.StrNameLabel;
-import flixel.FlxCamera;
-import flixel.FlxObject;
-import flixel.addons.ui.FlxUIText;
-import haxe.zip.Writer;
-import Conductor.BPMChangeEvent;
 import Section.SwagSection;
 import Song.SongData;
+import Song.SongMeta;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.ui.FlxInputText;
-import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
-import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
-import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.addons.ui.FlxUIText;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.system.FlxSound;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
 import haxe.Json;
+import lime.app.Application;
 import openfl.events.Event;
-import openfl.events.IOErrorEvent;
-import openfl.events.IOErrorEvent;
 import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
-import openfl.utils.ByteArray;
+
+using StringTools;
+
+#if FEATURE_FILESYSTEM
+import sys.FileSystem;
+import sys.io.File;
+#end
 #if FEATURE_DISCORD
 import Discord.DiscordClient;
 #end
-
-using StringTools;
 
 class ChartingState extends MusicBeatState
 {
@@ -1938,29 +1925,22 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.sound.music != null)
 			{
-				if (FlxG.sound.music.playing)
+				#if FLX_PITCH
+				FlxG.sound.music.pitch = speed;
+				try
 				{
-					@:privateAccess
+					// We need to make CERTAIN vocals exist and are non-empty
+					// before we try to play them. Otherwise the game crashes.
+					if (vocals != null && vocals.length > 0)
 					{
-						#if desktop
-						// The __backend.handle attribute is only available on native.
-						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, speed);
-						try
-						{
-							// We need to make CERTAIN vocals exist and are non-empty
-							// before we try to play them. Otherwise the game crashes.
-							if (vocals != null && vocals.length > 0)
-							{
-								lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, speed);
-							}
-						}
-						catch (e)
-						{
-							// Debug.logTrace("failed to pitch vocals (probably cuz they don't exist)");
-						}
-						#end
+						vocals.pitch = speed;
 					}
 				}
+				catch (e)
+				{
+					// Debug.logTrace("failed to pitch vocals (probably cuz they don't exist)");
+				}
+				#end
 			}
 
 			for (note in curRenderedNotes)
@@ -2807,7 +2787,7 @@ class ChartingState extends MusicBeatState
 
 				var sustainVis:FlxSprite = new FlxSprite(curSelectedNoteObject.x + (GRID_SIZE / 2),
 					curSelectedNoteObject.y + GRID_SIZE).makeGraphic(8,
-					Math.floor((getYfromStrum(curSelectedNoteObject.strumTime + curSelectedNote[2]) * zoomFactor) - curSelectedNoteObject.y));
+						Math.floor((getYfromStrum(curSelectedNoteObject.strumTime + curSelectedNote[2]) * zoomFactor) - curSelectedNoteObject.y));
 				curSelectedNoteObject.sustainLength = curSelectedNote[2];
 				Debug.logTrace("new sustain " + curSelectedNoteObject.sustainLength);
 				curSelectedNoteObject.noteCharterObject = sustainVis;

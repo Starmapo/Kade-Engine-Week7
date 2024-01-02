@@ -1,32 +1,22 @@
 package;
 
 import Conductor.BPMChangeEvent;
-import flixel.FlxCamera;
-import flixel.math.FlxRect;
-import Song.SongData;
 import Section.SwagSection;
-import flixel.system.FlxSound;
-import flixel.input.gamepad.FlxGamepad;
-import flixel.util.FlxAxes;
-import flixel.FlxSubState;
-import Options.Option;
-import flixel.input.FlxInput;
-import flixel.input.keyboard.FlxKey;
+import Song.SongData;
+import flixel.FlxCamera;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.effects.FlxFlicker;
-import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.FlxSubState;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.gamepad.FlxGamepad;
+import flixel.math.FlxMath;
+import flixel.math.FlxRect;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
-import flixel.util.FlxSort;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import lime.app.Application;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.input.FlxKeyManager;
+import flixel.util.FlxSort;
 
 using StringTools;
 
@@ -465,9 +455,7 @@ class DiffOverview extends FlxSubState
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 				}
-				else
-				{
-				}
+				else {}
 			}
 			daBeats += 1;
 		}

@@ -1,0 +1,72 @@
+{
+  "dependencies": [
+    {
+      "name": "discord_rpc",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/Aidan63/linc_discord-rpc.git"
+    },
+    {
+      "name": "extension-webm",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/KadeDev/extension-webm.git"
+    },
+    {
+      "name": "flixel",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "flixel-addons",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "flixel-ui",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "hscript",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "hxcpp",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "hxcpp-debug-server",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "lime",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "linc_luajit",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/nebulazorua/linc_luajit.git"
+    },
+    {
+      "name": "openfl",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "polymod",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/larsiusprime/polymod.git"
+    }
+  ]
+}

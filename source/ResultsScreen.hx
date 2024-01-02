@@ -1,35 +1,15 @@
 package;
 
-import haxe.Exception;
-#if FEATURE_STEPMANIA
-import smTools.SMFile;
-#end
-#if FEATURE_FILESYSTEM
-import sys.FileSystem;
-import sys.io.File;
-#end
-import openfl.geom.Matrix;
-import openfl.display.BitmapData;
-import flixel.system.FlxSound;
-import flixel.util.FlxAxes;
-import flixel.FlxSubState;
-import Options.Option;
-import flixel.input.FlxInput;
-import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.effects.FlxFlicker;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.FlxSubState;
+import flixel.math.FlxMath;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import lime.app.Application;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.input.FlxKeyManager;
+import openfl.display.BitmapData;
 
 using StringTools;
 

@@ -1,14 +1,12 @@
 package;
 
-import flixel.FlxSprite;
 import flixel.FlxG;
-import flixel.FlxBasic;
-import flixel.group.FlxGroup;
-import flixel.system.FlxSound;
+import flixel.FlxSprite;
 import flixel.addons.effects.chainable.FlxWaveEffect;
-import flixel.util.FlxTimer;
-import flixel.tweens.FlxEase;
+import flixel.group.FlxGroup;
+import flixel.sound.FlxSound;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
 
 class Stage extends MusicBeatState
 {

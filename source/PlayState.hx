@@ -1,87 +1,55 @@
 package;
 
+import Replay.Ana;
+import Replay.Analysis;
+import Section.SwagSection;
+import Song.SongData;
+import flixel.FlxBasic;
+import flixel.FlxCamera;
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.FlxSubState;
+import flixel.addons.effects.FlxTrail;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.keyboard.FlxKey;
+import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
+import flixel.sound.FlxSound;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.ui.FlxBar;
+import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxStringUtil;
+import flixel.util.FlxTimer;
+import openfl.Lib;
+import openfl.display.BitmapData;
+import openfl.events.KeyboardEvent;
+import openfl.media.Sound;
+
+using StringTools;
+
 #if FEATURE_LUAMODCHART
 import LuaClass.LuaCamera;
 import LuaClass.LuaCharacter;
 import LuaClass.LuaNote;
 #end
-import lime.media.openal.AL;
-import Song.Event;
-import openfl.media.Sound;
 #if FEATURE_STEPMANIA
 import smTools.SMFile;
 #end
 #if FEATURE_FILESYSTEM
-import sys.io.File;
-import Sys;
 import sys.FileSystem;
+import sys.io.File;
 #end
-import openfl.ui.KeyLocation;
-import openfl.events.Event;
-import haxe.EnumTools;
-import openfl.ui.Keyboard;
-import openfl.events.KeyboardEvent;
-import Replay.Ana;
-import Replay.Analysis;
-#if FEATURE_WEBM
-import webm.WebmPlayer;
-#end
-import flixel.input.keyboard.FlxKey;
-import haxe.Exception;
-import openfl.geom.Matrix;
-import openfl.display.BitmapData;
-import openfl.utils.AssetType;
-import lime.graphics.Image;
-import flixel.graphics.FlxGraphic;
-import openfl.utils.AssetManifest;
-import openfl.utils.AssetLibrary;
-import lime.app.Application;
-import lime.media.AudioContext;
-import lime.media.AudioManager;
-import openfl.Lib;
-import Section.SwagSection;
-import Song.SongData;
-import WiggleEffect.WiggleEffectType;
-import flixel.FlxBasic;
-import flixel.FlxCamera;
-import flixel.FlxG;
-import flixel.FlxGame;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.FlxSubState;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.effects.FlxTrail;
-import flixel.addons.effects.FlxTrailArea;
-import flixel.addons.effects.chainable.FlxEffectSprite;
-import flixel.addons.effects.chainable.FlxWaveEffect;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.graphics.atlas.FlxAtlas;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import flixel.system.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.ui.FlxBar;
-import flixel.util.FlxCollision;
-import flixel.util.FlxColor;
-import flixel.util.FlxSort;
-import flixel.util.FlxStringUtil;
-import flixel.util.FlxTimer;
-import haxe.Json;
-import openfl.display.BlendMode;
-import openfl.display.StageQuality;
-import openfl.filters.ShaderFilter;
 #if FEATURE_DISCORD
 import Discord.DiscordClient;
 #end
-
-using StringTools;
 
 class PlayState extends MusicBeatState
 {
@@ -911,8 +879,7 @@ class PlayState extends MusicBeatState
 			add(judgementCounter);
 		}
 
-		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY",
-			20);
+		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
 		replayTxt.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		replayTxt.borderSize = 4;
 		replayTxt.borderQuality = 2;
@@ -1488,36 +1455,10 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = startTime;
 		startTime = 0;
 
-		/*@:privateAccess
-			{
-				var aux = AL.createAux();
-				var fx = AL.createEffect();
-				AL.effectf(fx,AL.PITCH,songMultiplier);
-				AL.auxi(aux, AL.EFFECTSLOT_EFFECT, fx);
-				var instSource = FlxG.sound.music._channel.__source;
-
-				var backend:lime._internal.backend.native.NativeAudioSource = instSource.__backend;
-
-				AL.source3i(backend.handle, AL.AUXILIARY_SEND_FILTER, aux, 1, AL.FILTER_NULL);
-				if (vocals != null)
-				{
-					var vocalSource = vocals._channel.__source;
-
-					backend = vocalSource.__backend;
-					AL.source3i(backend.handle, AL.AUXILIARY_SEND_FILTER, aux, 1, AL.FILTER_NULL);
-				}
-
-				trace("pitched to " + songMultiplier);
-		}*/
-
-		#if cpp
-		@:privateAccess
-		{
-			lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-			if (vocals.playing)
-				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-		}
-		trace("pitched inst and vocals to " + songMultiplier);
+		#if FLX_PITCH
+		FlxG.sound.music.pitch = songMultiplier;
+		if (vocals.playing)
+			vocals.pitch = songMultiplier;
 		#end
 
 		for (i in 0...unspawnNotes.length)
@@ -1968,16 +1909,6 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.time = Conductor.songPosition * songMultiplier;
 		vocals.time = FlxG.sound.music.time;
 
-		@:privateAccess
-		{
-			#if desktop
-			// The __backend.handle attribute is only available on native.
-			lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-			if (vocals.playing)
-				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-			#end
-		}
-
 		#if FEATURE_DISCORD
 		DiscordClient.changePresence(detailsText
 			+ " "
@@ -2062,16 +1993,6 @@ class PlayState extends MusicBeatState
 				currentLuaIndex++;
 			}
 		}
-
-		#if cpp
-		if (FlxG.sound.music.playing)
-			@:privateAccess
-		{
-			lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-			if (vocals.playing)
-				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, songMultiplier);
-		}
-		#end
 
 		if (generatedMusic)
 		{

@@ -1,8 +1,17 @@
 package;
 
-import openfl.utils.Future;
+import Song.SongData;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.gamepad.FlxGamepad;
+import flixel.math.FlxMath;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import openfl.media.Sound;
-import flixel.system.FlxSound;
+
+using StringTools;
+
 #if FEATURE_STEPMANIA
 import smTools.SMFile;
 #end
@@ -10,21 +19,9 @@ import smTools.SMFile;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import Song.SongData;
-import flixel.input.gamepad.FlxGamepad;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
 #if FEATURE_DISCORD
 import Discord.DiscordClient;
 #end
-
-using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
@@ -402,12 +399,8 @@ class FreeplayState extends MusicBeatState
 				changeDiff(1);
 		}
 
-		#if cpp
-		@:privateAccess
-		{
-			if (FlxG.sound.music.playing)
-				lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, rate);
-		}
+		#if FLX_PITCH
+		FlxG.sound.music.pitch = rate;
 		#end
 
 		if (controls.BACK)
@@ -624,9 +617,7 @@ class FreeplayState extends MusicBeatState
 				GameplayCustomizeState.freeplayWeek = songs[curSelected].week;
 			}
 		}
-		catch (ex)
-		{
-		}
+		catch (ex) {}
 
 		if (openedPreview)
 		{
