@@ -47,8 +47,6 @@ class TitleState extends MusicBeatState
 
 		FlxG.autoPause = false;
 
-		FlxG.save.bind('funkin', 'ninjamuffin99');
-
 		PlayerSettings.init();
 
 		KadeEngineData.initSave();

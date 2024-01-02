@@ -27,8 +27,6 @@ class FreeplayState extends MusicBeatState
 {
 	public static var songs:Array<FreeplaySongMetadata> = [];
 
-	var selector:FlxText;
-
 	public static var rate:Float = 1.0;
 
 	public static var curSelected:Int = 0;
@@ -198,13 +196,6 @@ class FreeplayState extends MusicBeatState
 
 		// FlxG.sound.playMusic(Paths.music('title'), 0);
 		// FlxG.sound.music.fadeIn(2, 0, 0.8);
-		selector = new FlxText();
-
-		selector.size = 40;
-		selector.text = ">";
-		// add(selector);
-
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
 		super.create();
 	}
@@ -259,10 +250,10 @@ class FreeplayState extends MusicBeatState
 				trace("I ONLY FOUND " + diffsThatExist);
 
 			FreeplayState.songData.set(songId, diffs);
-			trace('loaded diffs for ' + songId);
+			// trace('loaded diffs for ' + songId);
 			FreeplayState.songs.push(meta);
 
-			#if FFEATURE_FILESYSTEM
+			#if FEATURE_FILESYSTEM
 			sys.thread.Thread.create(() ->
 			{
 				FlxG.sound.cache(Paths.inst(songId));
@@ -562,8 +553,6 @@ class FreeplayState extends MusicBeatState
 					curDifficulty = 2;
 			}
 		}
-
-		// selector.y = (70 * curSelected) + 30;
 
 		// adjusting the highscore song name to be compatible (changeSelection)
 		// would read original scores if we didn't change packages

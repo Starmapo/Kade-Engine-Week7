@@ -49,8 +49,6 @@ class Caching extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.save.bind('funkin', 'ninjamuffin99');
-
 		PlayerSettings.init();
 
 		KadeEngineData.initSave();

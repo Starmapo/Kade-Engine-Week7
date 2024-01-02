@@ -17,3 +17,9 @@
 
 - Unused/unneeded files
 - `actuate` and `hxvm-luajit` libraries, as they're unused
+
+### Fixed
+
+- Fixed save not keeping sound settings
+- Fixed underlay alpha in gameplay customize state
+- Fixed strumline bounds in gameplay customize state
