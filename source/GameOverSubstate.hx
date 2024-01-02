@@ -110,7 +110,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			bf.playAnim('deathLoop', true);
 		}
-		FlxG.log.add('beat');
+		// FlxG.log.add('beat');
 	}
 
 	var isEnding:Bool = false;
