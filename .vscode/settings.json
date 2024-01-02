@@ -9,5 +9,6 @@
 			"source.organizeImports": "explicit"
 		}
 	},
-	"haxe.enableExtendedIndentation": true
+	"haxe.enableExtendedIndentation": true,
+	"markdownlint.config": {"MD024": false}
 }
