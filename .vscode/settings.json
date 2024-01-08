@@ -2,13 +2,5 @@
 	"search.exclude": {
 		"export/**/*.hx": true
 	},
-	"[haxe]": {
-		"editor.formatOnSave": true,
-		"editor.formatOnPaste": true,
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": "explicit"
-		}
-	},
-	"haxe.enableExtendedIndentation": true,
 	"markdownlint.config": {"MD024": false}
 }

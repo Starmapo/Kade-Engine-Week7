@@ -1,11 +1,10 @@
 package;
 
-import lime.app.Application;
-import flixel.FlxBasic;
-import openfl.Lib;
 import Conductor.BPMChangeEvent;
+import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
+import lime.app.Application;
 
 class MusicBeatState extends FlxUIState
 {

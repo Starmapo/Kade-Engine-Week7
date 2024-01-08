@@ -1,17 +1,14 @@
-import flixel.FlxG;
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-import openfl.text.TextFieldAutoSize;
-import flixel.system.FlxAssets;
-import openfl.text.TextFormat;
 import flash.display.Graphics;
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.text.TextField;
-import flash.text.TextFormatAlign;
-import flixel.math.FlxMath;
+import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.text.TextFieldAutoSize;
+import openfl.text.TextFormat;
 
 /**
  * stolen from https://github.com/HaxeFlixel/flixel/blob/master/flixel/system/debug/stats/StatsGraph.hx
@@ -249,7 +246,7 @@ class HitGraph extends Sprite
 
 	public function fitX(x:Float)
 	{
-		return (x / FlxG.sound.music.length) * width;
+		return ((x / (FlxG.sound.music.length / PlayState.songMultiplier)) * width) * PlayState.songMultiplier;
 	}
 
 	public function addToHistory(diff:Float, judge:String, time:Float)

@@ -390,8 +390,12 @@ class FreeplayState extends MusicBeatState
 				changeDiff(1);
 		}
 
-		#if FLX_PITCH
-		FlxG.sound.music.pitch = rate;
+		#if cpp
+		@:privateAccess
+		{
+			if (FlxG.sound.music.playing)
+				lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__audioSource.__backend.handle, lime.media.openal.AL.PITCH, rate);
+		}
 		#end
 
 		if (controls.BACK)
@@ -515,11 +519,11 @@ class FreeplayState extends MusicBeatState
 		switch (songHighscore)
 		{
 			case 'Dad-Battle':
-				songHighscore = 'Dadbattle';
+				songHighscore = 'dadbattle';
 			case 'Philly-Nice':
-				songHighscore = 'Philly';
+				songHighscore = 'philly';
 			case 'M.I.L.F':
-				songHighscore = 'Milf';
+				songHighscore = 'milf';
 		}
 
 		#if !switch
@@ -560,11 +564,11 @@ class FreeplayState extends MusicBeatState
 		switch (songHighscore)
 		{
 			case 'Dad-Battle':
-				songHighscore = 'Dadbattle';
+				songHighscore = 'dadbattle';
 			case 'Philly-Nice':
-				songHighscore = 'Philly';
+				songHighscore = 'philly';
 			case 'M.I.L.F':
-				songHighscore = 'Milf';
+				songHighscore = 'milf';
 		}
 
 		#if !switch

@@ -14,9 +14,14 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import lime.app.Application;
 import openfl.Assets;
 
 using StringTools;
+#if FEATURE_DISCORD
+import Discord.DiscordClient;
+#end
+
 
 class TitleState extends MusicBeatState
 {
@@ -101,6 +106,15 @@ class TitleState extends MusicBeatState
 		startIntro();
 		#end
 		#end
+
+		/*#if FEATURE_DISCORD
+		DiscordClient.initialize();
+
+		Application.current.onExit.add(function(exitCode)
+		{
+			DiscordClient.shutdown();
+		});
+		#end*/
 	}
 
 	var logoBl:FlxSprite;

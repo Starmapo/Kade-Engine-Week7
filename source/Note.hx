@@ -225,8 +225,8 @@ class Note extends FlxSprite
 		if (FlxG.save.data.downscroll && sustainNote)
 			flipY = true;
 
-		var stepHeight = ((0.45 * Conductor.stepCrochet)) * FlxMath.roundDecimal(PlayStateChangeables.scrollSpeed == 1 ? PlayState.SONG.speed : PlayStateChangeables.scrollSpeed,
-			2);
+		var stepHeight = (((0.45 * Conductor.stepCrochet)) * FlxMath.roundDecimal(PlayStateChangeables.scrollSpeed == 1 ? PlayState.SONG.speed : PlayStateChangeables.scrollSpeed,
+			2)) / PlayState.songMultiplier;
 
 		if (isSustainNote && prevNote != null)
 		{
@@ -284,16 +284,16 @@ class Note extends FlxSprite
 		{
 			if (isSustainNote)
 			{
-				if (strumTime - Conductor.songPosition <= (166 * Conductor.timeScale) * 0.5
-					&& strumTime - Conductor.songPosition >= -166 * Conductor.timeScale)
+				if (strumTime - Conductor.songPosition <= (((166 * Conductor.timeScale) / (PlayState.songMultiplier < 1 ? PlayState.songMultiplier : 1) * 0.5))
+					&& strumTime - Conductor.songPosition >= (((-166 * Conductor.timeScale) / (PlayState.songMultiplier < 1 ? PlayState.songMultiplier : 1))))
 					canBeHit = true;
 				else
 					canBeHit = false;
 			}
 			else
 			{
-				if (strumTime - Conductor.songPosition <= (166 * Conductor.timeScale)
-					&& strumTime - Conductor.songPosition >= -166 * Conductor.timeScale)
+				if (strumTime - Conductor.songPosition <= (((166 * Conductor.timeScale) / (PlayState.songMultiplier < 1 ? PlayState.songMultiplier : 1)))
+					&& strumTime - Conductor.songPosition >= (((-166 * Conductor.timeScale) / (PlayState.songMultiplier < 1 ? PlayState.songMultiplier : 1))))
 					canBeHit = true;
 				else
 					canBeHit = false;
